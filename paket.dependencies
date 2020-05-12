@@ -1,0 +1,24 @@
+source https://api.nuget.org/v3/index.json
+framework: netstandard2.1, netcoreapp3.1
+
+# Code Analyzers
+nuget Microsoft.CodeAnalysis.FxCopAnalyzers
+nuget Microsoft.CodeAnalysis.Analyzers
+
+# Microsoft Application Insights
+nuget Microsoft.ApplicationInsights.AspNetCore
+nuget Microsoft.ApplicationInsights.PerfCounterCollector
+nuget Microsoft.ApplicationInsights.WindowsServer
+
+# Microsoft Extensions
+nuget Microsoft.Extensions.Configuration.Abstractions
+nuget Microsoft.Extensions.Logging.Abstractions
+nuget Microsoft.Extensions.Options
+nuget Microsoft.Extensions.Options.ConfigurationExtensions
+
+# Microsoft Azure IOT hub
+nuget Microsoft.Azure.Devices
+nuget Microsoft.Azure.Devices.Client
+
+# Others
+nuget System.Text.Json

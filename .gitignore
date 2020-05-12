@@ -1,0 +1,5 @@
+packages/
+paket-files/
+.vs/
+**/obj/
+**/bin/

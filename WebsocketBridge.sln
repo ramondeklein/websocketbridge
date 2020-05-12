@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketBridge.Client", "WebSocketBridge.Client\WebSocketBridge.Client.csproj", "{50FEA422-E5DA-4179-BB52-24BDAEB926ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketBridge.Server", "WebSocketBridge.Server\WebSocketBridge.Server.csproj", "{31F2618D-E014-42DB-9897-A9220EAD8C9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution files", "Solution files", "{A678F73C-E8F4-4450-9B38-3C1237035F4C}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		paket.dependencies = paket.dependencies
+		paket.lock = paket.lock
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50FEA422-E5DA-4179-BB52-24BDAEB926ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50FEA422-E5DA-4179-BB52-24BDAEB926ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50FEA422-E5DA-4179-BB52-24BDAEB926ED}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{50FEA422-E5DA-4179-BB52-24BDAEB926ED}.Debug|x64.Build.0 = Debug|Any CPU
+		{50FEA422-E5DA-4179-BB52-24BDAEB926ED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{50FEA422-E5DA-4179-BB52-24BDAEB926ED}.Debug|x86.Build.0 = Debug|Any CPU
+		{50FEA422-E5DA-4179-BB52-24BDAEB926ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50FEA422-E5DA-4179-BB52-24BDAEB926ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50FEA422-E5DA-4179-BB52-24BDAEB926ED}.Release|x64.ActiveCfg = Release|Any CPU
+		{50FEA422-E5DA-4179-BB52-24BDAEB926ED}.Release|x64.Build.0 = Release|Any CPU
+		{50FEA422-E5DA-4179-BB52-24BDAEB926ED}.Release|x86.ActiveCfg = Release|Any CPU
+		{50FEA422-E5DA-4179-BB52-24BDAEB926ED}.Release|x86.Build.0 = Release|Any CPU
+		{31F2618D-E014-42DB-9897-A9220EAD8C9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F2618D-E014-42DB-9897-A9220EAD8C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F2618D-E014-42DB-9897-A9220EAD8C9C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{31F2618D-E014-42DB-9897-A9220EAD8C9C}.Debug|x64.Build.0 = Debug|Any CPU
+		{31F2618D-E014-42DB-9897-A9220EAD8C9C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{31F2618D-E014-42DB-9897-A9220EAD8C9C}.Debug|x86.Build.0 = Debug|Any CPU
+		{31F2618D-E014-42DB-9897-A9220EAD8C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F2618D-E014-42DB-9897-A9220EAD8C9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F2618D-E014-42DB-9897-A9220EAD8C9C}.Release|x64.ActiveCfg = Release|Any CPU
+		{31F2618D-E014-42DB-9897-A9220EAD8C9C}.Release|x64.Build.0 = Release|Any CPU
+		{31F2618D-E014-42DB-9897-A9220EAD8C9C}.Release|x86.ActiveCfg = Release|Any CPU
+		{31F2618D-E014-42DB-9897-A9220EAD8C9C}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0D106D9-87F2-4B67-BAB3-0D4C25BA4391}
+	EndGlobalSection
+EndGlobal

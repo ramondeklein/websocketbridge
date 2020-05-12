@@ -1,0 +1,29 @@
+<Project>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Configurations>Debug;Release</Configurations>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>DEBUG</DefineConstants>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>0.0.0</Version>
+    <Product>Websocket bridge</Product>
+    <Company>Ramon de Klein</Company>
+    <Copyright>Copyright 2020 Ramon de Klein &lt;mail@ramondeklein.nl&gt;</Copyright>
+    <Configuration>Release build</Configuration>
+    <Configuration Condition=" '$(Configuration)' == 'Debug' ">Debug build (INTERNAL USE ONLY)</Configuration>
+    <InformationalVersion>Unofficial developer build</InformationalVersion>
+  </PropertyGroup>
+</Project>

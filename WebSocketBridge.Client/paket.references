@@ -1,0 +1,7 @@
+Microsoft.CodeAnalysis.FxCopAnalyzers
+Microsoft.CodeAnalysis.Analyzers
+Microsoft.Extensions.Configuration.Abstractions
+Microsoft.Extensions.Logging.Abstractions
+Microsoft.Extensions.Options
+Microsoft.Extensions.Options.ConfigurationExtensions
+System.Text.Json
