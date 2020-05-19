@@ -17,13 +17,5 @@
         /// LOCAL_IP   (where LOCAL_IP contains the IP address, such as 10.1.2.3)
         /// </example>
         public string LocalIpVariable { get; set; } = "LOCAL_IP";
-
-        /// <summary>
-        /// Base64 encoded 256-bit encryption key.
-        /// </summary>
-        /// <remarks>
-        /// This encryption key is used to generate the 
-        /// </remarks>
-        public string EncryptionKey { get; set; }
     }
 }

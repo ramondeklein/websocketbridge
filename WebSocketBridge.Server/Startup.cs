@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebSocketBridge.Server.Authentication;
+using WebSocketBridge.Server.Encryption;
 using WebSocketBridge.Server.IotHub;
 using WebSocketBridge.Server.MultiNode;
 using WebSocketBridge.Server.Services;
@@ -52,8 +53,11 @@ namespace WebSocketBridge.Server
 
             services
                 .Configure<IotSettings>(Configuration.GetSection("Iot"))
+                .Configure<EncryptionOptions>(Configuration.GetSection("Encryption"))
                 .AddSingleton<IServiceClientProvider, ServiceClientProvider>()
                 .AddSingleton<IRequestBridgeNotifier, IotHubRequestBridgeNotifier>()
+                .AddSingleton<ISign, Sign>()
+                .AddSingleton<IEncryptionKeyProvider, EncryptionKeyFromConfigurationProvider>()
                 .AddSingleton(ctx => UrlEncoder.Default);
 
             var webBridgeConfiguration = Configuration.GetSection("WebBridge");

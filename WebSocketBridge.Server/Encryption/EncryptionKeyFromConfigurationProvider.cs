@@ -3,13 +3,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 
-namespace WebSocketBridge.Server.MultiNode
+namespace WebSocketBridge.Server.Encryption
 {
     public class EncryptionKeyFromConfigurationProvider : IEncryptionKeyProvider
     {
-        private readonly IOptionsMonitor<MultiNodeOptions> _options;
+        private readonly IOptionsMonitor<EncryptionOptions> _options;
         
-        public EncryptionKeyFromConfigurationProvider(IOptionsMonitor<MultiNodeOptions> options)
+        public EncryptionKeyFromConfigurationProvider(IOptionsMonitor<EncryptionOptions> options)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
         }

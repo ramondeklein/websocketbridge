@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace WebSocketBridge.Server.MultiNode
+namespace WebSocketBridge.Server.Encryption
 {
     public interface IEncryptionKeyProvider
     {

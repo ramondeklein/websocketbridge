@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using WebSocketBridge.Server.Encryption;
 using WebSocketBridge.Server.Helpers;
 
 namespace WebSocketBridge.Server.MultiNode

@@ -12,7 +12,6 @@ namespace WebSocketBridge.Server.MultiNode
             services
                 .Configure<MultiNodeOptions>(multiNodeSettings)
                 .AddWebSocketBridgeCore()
-                .AddSingleton<IEncryptionKeyProvider, EncryptionKeyFromConfigurationProvider>()
                 .AddSingleton<INodeMapping, NodeMapping>()
                 .AddSingleton<IStreamProxy, StreamProxy>()
                 .AddSingleton<INodeUriProvider, NodeUriFromEnvironmentProvider>()

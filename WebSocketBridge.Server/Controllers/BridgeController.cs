@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebSocketBridge.Server.Encryption;
 using WebSocketBridge.Server.Services;
-using WebSocketBridge.Server.SingleNode;
 
 namespace WebSocketBridge.Server.Controllers
 {
@@ -21,21 +21,45 @@ namespace WebSocketBridge.Server.Controllers
         private readonly WebBridgeOptions _options;
         private readonly IStreamBridge _streamBridge;
         private readonly UrlEncoder _urlEncoder;
+        private readonly ISign _sign;
         private readonly IRequestBridgeNotifier _requestBridgeNotifier;
         private readonly ILogger<BridgeController> _logger;
 
-        public BridgeController(IOptions<WebBridgeOptions> options, IStreamBridge streamBridge, UrlEncoder urlEncoder, IRequestBridgeNotifier requestBridgeNotifier, ILogger<BridgeController> logger)
+        public BridgeController(IOptions<WebBridgeOptions> options, IStreamBridge streamBridge, UrlEncoder urlEncoder, ISign sign, IRequestBridgeNotifier requestBridgeNotifier, ILogger<BridgeController> logger)
         {
             _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
             _streamBridge = streamBridge ?? throw new ArgumentNullException(nameof(streamBridge));
+            _sign = sign ?? throw new ArgumentNullException(nameof(sign));
             _urlEncoder = urlEncoder ?? throw new ArgumentNullException(nameof(urlEncoder));
             _requestBridgeNotifier = requestBridgeNotifier ?? throw new ArgumentNullException(nameof(requestBridgeNotifier));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [Authorize]
+        [HttpGet("getSignedUrl")]
+        public async Task<string> ConnectAsync([FromQuery] string deviceId, [FromQuery] string? requestData, [FromQuery] DateTime expirationUtc)
+        {
+            var signature = await _sign.SignAsync(new {deviceId, requestData, ExpirationUtc = expirationUtc.ToUniversalTime() });
+            var connectSignedUrl = $"{_options.ExternalHostname}/bridge/connectSigned?deviceId={_urlEncoder.Encode(deviceId)}&requestData={_urlEncoder.Encode(requestData)}&expirationUtc={expirationUtc.ToUniversalTime():O}&signature={_urlEncoder.Encode(signature)}";
+            return connectSignedUrl;
+        }
+
+        [HttpGet("connectSigned")]
+        public async Task<IActionResult> ConnectAsync([FromQuery] string deviceId, [FromQuery] string? requestData, [FromQuery] DateTime expirationUtc, [FromQuery] string signature)
+        {
+            var expectedSignature = await _sign.SignAsync(new { deviceId, requestData, ExpirationUtc = expirationUtc.ToUniversalTime() });
+            if (signature != expectedSignature)
+                return BadRequest();
+
+            if (DateTime.UtcNow > expirationUtc.ToUniversalTime())
+                return BadRequest();
+
+            return await ConnectAsync(deviceId, requestData).ConfigureAwait(false);
+        }
+
+        [Authorize]
         [HttpGet("connect")]
-        public async Task ConnectAsync([FromQuery] string deviceId, [FromQuery] string? requestData)
+        public async Task<IActionResult> ConnectAsync([FromQuery] string deviceId, [FromQuery] string? requestData)
         {
             // TODO: Track the events in AppInsights
 
@@ -56,7 +80,7 @@ namespace WebSocketBridge.Server.Controllers
                 if (!accepted)
                 {
                     _logger.LogWarning("Bridge to device '{DeviceId}' with bridge-token '{BridgeToken}' was not accepted.", deviceId, bridgeToken);
-                    return;
+                    return Conflict();
                 }
                 _logger.LogDebug("Bridge to device '{DeviceId}' with bridge-token '{BridgeToken}' is accepted by the device (waiting for bridge to establish).", deviceId, bridgeToken);
 
@@ -70,6 +94,8 @@ namespace WebSocketBridge.Server.Controllers
                 // Close our socket
                 await requesterSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "ok", cancellationToken).ConfigureAwait(false);
                 _logger.LogDebug("Bridge to device '{DeviceId}' with bridge-token '{BridgeToken}' is closed.", deviceId, bridgeToken);
+
+                return Ok();
             }
             catch (Exception exc)
             {
